@@ -32,8 +32,8 @@ jobs:
       - name: login
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          username: ${{ secrets.DH_USERNAME }}
+          password: ${{ secrets.DH_PASSWORD }}
 
       - name: Build and push
         uses: docker/build-push-action@v6
@@ -44,16 +44,16 @@ jobs:
             linux/amd64
             linux/arm64
           tags: |
-            shirokumo/apt-mirror2:8
-            shirokumo/apt-mirror2:latest
+            coralhl/apt-mirror2:14
+            coralhl/apt-mirror2:latest
           labels: |
             org.opencontainers.image.created=${{ steps.date.outputs.CURRENT_DATE }}
             org.opencontainers.image.revision=${{ github.sha }}
             org.opencontainers.image.title=apt-mirror2
-            org.opencontainers.image.description=一个apt-mirror2的docker实现，添加了Nginx服务。A docker implementation of apt-mirror2 with Nginx service added.
+            org.opencontainers.image.description=Docker implementation of apt-mirror2 with Nginx service added.
             org.opencontainers.image.licenses=GPL-3.0-or-later
-            org.opencontainers.image.authors=White-Clouds
-            org.opencontainers.image.source=https://github.com/White-Clouds/apt-mirror2-docker
-            org.opencontainers.image.url=https://github.com/White-Clouds/apt-mirror2-docker
-            org.opencontainers.image.version=8
+            org.opencontainers.image.authors=coralhl
+            org.opencontainers.image.source=https://github.com/coralhl/apt-mirror2-docker
+            org.opencontainers.image.url=https://github.com/coralhl/apt-mirror2-docker
+            org.opencontainers.image.version=14
           push: true

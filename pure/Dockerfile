@@ -7,12 +7,11 @@ RUN apk update ;\
     apk add --no-cache binutils ;\
     rm -rf /var/cache/apk/* ;\
     apk cache clean ;\
-    wget https://gitlab.com/apt-mirror2/apt-mirror2/-/archive/v8/apt-mirror2-v8.tar.gz ;\
+    wget https://gitlab.com/apt-mirror2/apt-mirror2/-/archive/v14/apt-mirror2-v14.tar.gz ;\
     mkdir -p /tmp/apt-mirror2/ ;\
-    tar -xzf apt-mirror2-v8.tar.gz --strip-components=1 -C /tmp/apt-mirror2/ ;\
-    rm -rf apt-mirror2-v8.tar.gz ;\
+    tar -xzf apt-mirror2-v14.tar.gz --strip-components=1 -C /tmp/apt-mirror2/ ;\
+    rm -rf apt-mirror2-v14.tar.gz ;\
     cd /tmp/apt-mirror2 ;\
-    echo "setuptools==74.1.2 --hash=sha256:5f4c08aa4d3ebcb57a50c33b1b07e94315d7fc7230f7115e47fc99776c8ce308" >> requirements/dev.txt ;\
     pip --disable-pip-version-check --no-cache-dir install \
         -r requirements.txt \
         -r requirements/dev.txt ;\
@@ -30,7 +29,7 @@ RUN apk update ;\
 FROM alpine:3
 SHELL ["/bin/sh", "-ex", "-c"]
 
-ENV TZ=Asia/Shanghai \
+ENV TZ=Europe/Moscow \
     CRON_SCHEDULE="0 2,8,14,20 * * *"
 
 EXPOSE 80
