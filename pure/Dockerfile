@@ -20,6 +20,7 @@ RUN apk update ;\
         -r requirements.txt \
         -r requirements/dev.txt ;\
     pip install . ;\
+    pip install socksio "httpx[socks]" ;\
     cd / ;\
     rm -rf /tmp/apt-mirror2 ;\
     pyinstaller \

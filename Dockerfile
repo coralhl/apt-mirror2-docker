@@ -2,6 +2,7 @@
 FROM python:3.12-alpine AS builder
 SHELL ["/bin/sh", "-ex", "-c"]
 
+# COPY requirements-socks.txt /tmp/apt-mirror2/requirements-socks.txt
 RUN apk update ;\
     apk upgrade ;\
     apk add --no-cache \
@@ -20,6 +21,7 @@ RUN apk update ;\
         -r requirements.txt \
         -r requirements/dev.txt ;\
     pip install . ;\
+    pip install socksio "httpx[socks]" ;\
     cd / ;\
     rm -rf /tmp/apt-mirror2 ;\
     pyinstaller \
