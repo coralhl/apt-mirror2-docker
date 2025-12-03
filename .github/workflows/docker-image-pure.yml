@@ -10,6 +10,7 @@ on:
       - 'check.sh'
       - 'pure/entrypoint.sh'
       - 'pure/healthcheck.sh'
+  workflow_dispatch:
 
 jobs:
   build_latest-pure:
