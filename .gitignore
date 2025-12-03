@@ -1,0 +1,7 @@
+# macOS-specific files
+.DS_Store
+
+# jetbrains setting folder
+.idea/
+
+build.sh

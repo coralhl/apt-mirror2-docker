@@ -1,10 +1,14 @@
 # Similar as the initial build in https://gitlab.com/apt-mirror2/apt-mirror2/-/blob/master/Dockerfile
-FROM python:alpine AS builder
+FROM python:3.12-alpine AS builder
 SHELL ["/bin/sh", "-ex", "-c"]
 
 RUN apk update ;\
     apk upgrade ;\
-    apk add --no-cache binutils ;\
+    apk add --no-cache \
+        binutils \
+        gcc \
+        linux-headers \
+        musl-dev ;\
     rm -rf /var/cache/apk/* ;\
     apk cache clean ;\
     wget https://gitlab.com/apt-mirror2/apt-mirror2/-/archive/v14/apt-mirror2-v14.tar.gz ;\
@@ -22,6 +26,7 @@ RUN apk update ;\
         --clean \
         --onefile \
         --noconfirm \
+        --copy-metadata aioftp \
         --name apt-mirror \
         /usr/local/bin/apt-mirror
 
@@ -38,7 +43,7 @@ COPY --from=builder /dist/apt-mirror /usr/local/bin/apt-mirror
 
 RUN apk update &&\
     apk upgrade &&\
-    apk add --no-cache tzdata &&\
+    apk add --no-cache gpgv tzdata &&\
     rm -rf /var/cache/apk/* &&\
     apk cache clean
 
