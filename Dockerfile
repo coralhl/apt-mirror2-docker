@@ -1,5 +1,5 @@
 # Similar as the initial build in https://gitlab.com/apt-mirror2/apt-mirror2/-/blob/master/Dockerfile
-FROM python:3.12-alpine AS builder
+FROM python:3.13-alpine AS builder
 SHELL ["/bin/sh", "-ex", "-c"]
 
 # COPY requirements-socks.txt /tmp/apt-mirror2/requirements-socks.txt
@@ -12,10 +12,10 @@ RUN apk update ;\
         musl-dev ;\
     rm -rf /var/cache/apk/* ;\
     apk cache clean ;\
-    wget https://gitlab.com/apt-mirror2/apt-mirror2/-/archive/v14/apt-mirror2-v14.tar.gz ;\
+    wget https://gitlab.com/apt-mirror2/apt-mirror2/-/archive/v16/apt-mirror2-v16.tar.gz ;\
     mkdir -p /tmp/apt-mirror2/ ;\
-    tar -xzf apt-mirror2-v14.tar.gz --strip-components=1 -C /tmp/apt-mirror2/ ;\
-    rm -rf apt-mirror2-v14.tar.gz ;\
+    tar -xzf apt-mirror2-v16.tar.gz --strip-components=1 -C /tmp/apt-mirror2/ ;\
+    rm -rf apt-mirror2-v16.tar.gz ;\
     cd /tmp/apt-mirror2 ;\
     pip --disable-pip-version-check --no-cache-dir install \
         -r requirements.txt \
@@ -33,7 +33,7 @@ RUN apk update ;\
         /usr/local/bin/apt-mirror
 
 # Customize, add Nginx
-FROM alpine:3
+FROM alpine:3.24
 SHELL ["/bin/sh", "-ex", "-c"]
 
 ENV TZ=Europe/Moscow \
